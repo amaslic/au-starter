@@ -6,6 +6,7 @@ import { PLATFORM } from 'aurelia-pal';
 
 import {RouterConfiguration, Router, RouteConfig} from 'aurelia-router';
 import { Service } from 'services/service';
+import { updateProjectVal } from 'store/actions';
 
 @autoinject()
 @connectTo<IState>({
@@ -21,12 +22,13 @@ export class App {
 	//public data: any; //use Interface here instead of any
 
 	constructor(private store: Store<IState>, private service: Service){
-
+		this.store.registerAction('UpdateProjectVal', updateProjectVal);
 	}
 
-	/*activate(){
-			fetchData();
-	}*/
+	activate(){
+			//fetchData();
+			this.store.dispatch(updateProjectVal, "Aurelia Starter New");
+	}
 
 	/*fetchData = async () => {
 		this.data = await this.service.getData();
